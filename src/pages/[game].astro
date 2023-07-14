@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro'
+import GameDetail from '../components/GameDetail.astro'
+import { GAMES } from '../data/games'
+
+const { game } = Astro.params
+
+const data = GAMES.find((gm) => gm.id === game)
+if (!data) {
+  return Astro.redirect('/404')
+}
+---
+
+<Layout title={data.title}>
+  <main class='m-auto max-w-4xl'>
+    <GameDetail {...data} />
+  </main>
+</Layout>

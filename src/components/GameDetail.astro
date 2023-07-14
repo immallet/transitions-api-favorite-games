@@ -1,0 +1,64 @@
+---
+import Game from '../@types/game'
+import DesktopLogo from './DesktopLogo.astro'
+import Ps1Logo from './Ps1Logo.astro'
+
+type Props = Game
+
+const { id, title, description, img, playedYear, platform } = Astro.props
+---
+
+<div class='flex gap-x-4 justify-around md:justify-center items-center'>
+  <a
+    href='/'
+    type='button'
+    class='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+  >
+    <svg
+      class='w-4 h-4 rotate-180'
+      aria-hidden='true'
+      xmlns='http://www.w3.org/2000/svg'
+      fill='none'
+      viewBox='0 0 14 10'
+    >
+      <path
+        stroke='currentColor'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        stroke-width='2'
+        d='M1 5h12m0 0L9 1m4 4L9 9'></path>
+    </svg>
+  </a>
+  <h1
+    style='view-transition-name: main-title'
+    class='scale-75 md:scale-50 font-black uppercase text-5xl md:text-8xl text-center py-4 px-4'
+  >
+    My Favorite
+    <span class='block text-4xl md:text-6xl'>Played Games</span>
+  </h1>
+</div>
+<div class='grid md:grid-cols-[360px_1fr] mt-15 gap-5 px-4 py-2'>
+  <picture class='flex justify-center items-center'>
+    <img src={img} alt={`Portada del juego ${title}`} style=`view-transition-name: game-${id}` />
+  </picture>
+  <aside class='flex-grow-[3]'>
+    <h1 class='text-5xl font-black mb-4 text-center'>{title}</h1>
+    <p class='text-lg'>{description}</p>
+    <footer class='flex justify-center gap-4 mt-5'>
+      <p>
+        Played:
+        <span
+          style=`view-transition-name: game-${id}-${playedYear}`
+          class='bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300'
+        >
+          {playedYear}
+        </span>
+      </p>
+      <p class='flex items-center gap-2'>
+        Platform:
+        {platform === 'PS1' && <Ps1Logo view_transition_name={`game-${id}-${platform}`} />}
+        {platform === 'PC' && <DesktopLogo view_transition_name={`game-${id}-${platform}`} />}
+      </p>
+    </footer>
+  </aside>
+</div>

@@ -1,0 +1,11 @@
+---
+import Layout from '../layouts/Layout.astro'
+import GameDetail from '../components/GameDetail.astro'
+import { LOL } from '../data/games'
+---
+
+<Layout title={LOL.title}>
+  <main class='m-auto max-w-4xl'>
+    <GameDetail {...LOL} />
+  </main>
+</Layout>
