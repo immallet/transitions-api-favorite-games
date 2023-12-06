@@ -5,7 +5,7 @@ import Ps1Logo from './Ps1Logo.astro'
 
 type Props = Game
 
-const { id, title, description, img, playedYear, platform } = Astro.props
+const { id, title, description, img, playedYear, platforms } = Astro.props
 ---
 
 <div class='flex gap-x-4 justify-around md:justify-center items-center'>
@@ -56,8 +56,12 @@ const { id, title, description, img, playedYear, platform } = Astro.props
       </p>
       <p class='flex items-center gap-2'>
         Platform:
-        {platform === 'PS1' && <Ps1Logo view_transition_name={`game-${id}-${platform}`} />}
-        {platform === 'PC' && <DesktopLogo view_transition_name={`game-${id}-${platform}`} />}
+        {platforms.map(platform => (
+          <>
+            {platform === 'PS1' && <Ps1Logo view_transition_name={`game-${id}-${platform}`} />}
+            {platform === 'PC' && <DesktopLogo view_transition_name={`game-${id}-${platform}`} />}
+          </>
+        ))}
       </p>
     </footer>
   </aside>

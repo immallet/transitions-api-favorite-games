@@ -1,4 +1,4 @@
-export type Platforms = 'PS1' | 'PC'
+export type Platforms = 'PS1' | 'PC' | 'XBOX'
 
 export default interface Game {
 	id: string
@@ -6,5 +6,5 @@ export default interface Game {
 	description: string
 	img: string
 	playedYear: number
-	platform: Platforms
+	platforms: Platforms[]
 }

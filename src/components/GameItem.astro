@@ -2,16 +2,17 @@
 import Game from '../@types/game'
 import Ps1Logo from './Ps1Logo.astro'
 import DesktopLogo from './DesktopLogo.astro'
+import XboxLogo from './XboxLogo.astro'
 
 type Props = Game
 
-const { id, title, img, playedYear, platform } = Astro.props
+const { id, title, img, playedYear, platforms } = Astro.props
 ---
 
 <article>
   <a class='hover:scale-105 inline-block transition-all hover:shadow-2xl' href={`/${id}`}>
     <img
-      class='aspect-[389/500] h-full object-cover w-full max-w-full rounded'
+      class='aspect-[389/500] object-fill rounded'
       src={img}
       alt={`Portada del juego ${title}`}
       style=`view-transition-name: game-${id}`
@@ -23,7 +24,12 @@ const { id, title, img, playedYear, platform } = Astro.props
       class='bg-gray-100 text-gray-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300'
       >{playedYear}
     </span>
-    {platform === 'PS1' && <Ps1Logo view_transition_name={`game-${id}-${platform}`} />}
-    {platform === 'PC' && <DesktopLogo view_transition_name={`game-${id}-${platform}`} />}
+    {platforms.map(platform => (
+      <>
+        {platform === 'PS1' && <Ps1Logo view_transition_name={`game-${id}-${platform}`} />}
+        {platform === 'PC' && <DesktopLogo view_transition_name={`game-${id}-${platform}`} />}
+        {platform === 'XBOX' && <XboxLogo view_transition_name={`game-${id}-${platform}`} />}
+      </>
+    ))}
   </footer>
 </article>
